@@ -1,5 +1,6 @@
 fx_version 'bodacious'
 game 'gta5'
+lua54 'yes'
 
 author 'Apina'
 description 'Näyttää id kun painetaan tiettyä näppäintä'
@@ -10,3 +11,4 @@ client_scripts {
     'client/*.lua'
 }
 
+shared_script '@ox_lib/init.lua'

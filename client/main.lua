@@ -1,29 +1,30 @@
-local numerot = {
+local Keybinds = {
 	["U"] = 303,
 	["1008"] = 212, --HOME
 	["PAGEUP"] = 10,
 }
 
-function naytaId(paalla, nappain)
+function naytaId(pressed, button)
 	Citizen.CreateThread(function()
 		local headIds = { }
-		local omanumero = numerot[nappain]
-
-		print(omanumero)
-		print(nappain)
-		print(paalla)
+		local buttonToNumber = Keybinds[button]
+		if Config.debugPrints then
+			print(buttonToNumber)
+			print(button)
+			print(pressed)
+		end
 		for id = 0, 255, 1 do
 			if NetworkIsPlayerActive( id ) then 
 				local ped = GetPlayerPed( id )
 				if ped ~= nil and (GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), GetEntityCoords(ped)) < Config.drawDistance) and HasEntityClearLosToEntity(GetPlayerPed(-1),  ped,  17) then
 					if GetPlayerServerId(id) ~= nil then
 						headIds[id] = CreateFakeMpGamerTag(ped, tostring(GetPlayerServerId(id)), false, false, "", false )
-						if paalla then
-							if IsControlPressed(0, omanumero) then
-								SetMpGamerTagVisibility(headIds[id], false, true)  --laittaa päälle
+						if pressed then
+							if IsControlPressed(0, buttonToNumber) then
+								SetMpGamerTagVisibility(headIds[id], false, true)  --on
 							end
 						else 
-							SetMpGamerTagVisibility(headIds[id], false, false) --laittaa pois
+							SetMpGamerTagVisibility(headIds[id], false, false) --off
 						end
 					end
 				end

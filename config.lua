@@ -1,3 +1,4 @@
 Config = {}
 
-Config.drawDistance = 41.010  --Kuinka pitkä matka siihen että näet pelaajan [ID]
+Config.drawDistance = 41  --How long until you see player [ID]
+Config.debugPrints = false
